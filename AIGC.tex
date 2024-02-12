@@ -1,0 +1,314 @@
+%\documentclass[12pt,a4paper]{article}
+%\documentclass[aip,cha,reprint,amsmath,amsfonts]{revtex4-1}
+\documentclass[12pt,amsmath,amsfonts,twocolumn]{revtex4-1}
+
+\usepackage{bm}
+
+\usepackage{enumerate}
+
+
+
+%%%%%% My macros
+\newlength{\Mylen}
+
+% Include graphics aligned with the top
+\newcommand{\myincludegraphicst}[2][]
+{\settoheight{\Mylen}{\includegraphics[#1]{#2}}
+\raisebox{-\Mylen}{\includegraphics[#1]{#2}}}
+
+% Include graphics aligned with the bottom
+\newcommand{\myincludegraphicsc}[2][]
+{\settoheight{\Mylen}{\includegraphics[#1]{#2}}
+\raisebox{-.5\Mylen}{\includegraphics[#1]{#2}}}
+%%%%%% 
+
+
+
+%\usepackage{biblatex}
+%\bibliography{bb.bib}
+%\usepackage{multicol}
+%\usepackage{makeidx}
+%\makeindex
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphics}
+\usepackage{graphicx}
+%\usepackage{subcaption}
+\usepackage{color}   %May be necessary if you want to color links
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true, %set true if you want colored links
+    linktoc=all,     %set to all if you want both sections and subsections linked
+    linkcolor=blue,  %choose some color if you want links to stand out
+}
+
+
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+
+
+\include{epsf}
+
+\include{epstopdf}
+
+
+\DeclareGraphicsExtensions{.eps,.jpg,.png,.pdf}
+
+
+\PassOptionsToPackage{usenames,dvipsnames,svgnames}{xcolor}  
+
+
+%\usepackage[latin1]{inputenc}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows,positioning,automata}
+
+
+
+
+
+\newcommand{\IF}{\text{ if }}
+\newcommand{\THEN}{\text{ then }}
+\newcommand{\IFF}{\text{ iff }}
+\newcommand{\front}[1]{\mathrm{front} \left( #1 \right)}
+\newcommand{\reaction}[1]{\mathrm{reaction} \left( #1 \right)}
+\newcommand{\ball}[1]{\mathrm{Ball} \left( #1 \right)}
+\newcommand{\invisible}[1]{\mathrm{invisible} \left( #1 \right)}
+\newcommand{\cover}{\prec\!\!\!\cdot}
+% for vectors of Greek letters
+
+\newcommand{\uv}[1]{\ensuremath{\mathbf{\hat{#1}}}} % for unit vector
+
+\newcommand{\abs}[1]{\left| #1 \right|} % for absolute value
+\newcommand{\norm}[1]{\left\| #1 \right\|}
+\newcommand{\pnorm}[2]{\left\| #1 \right\|_#2}
+
+\newcommand{\ave}[1]{\left< #1 \right>} % for average
+\newcommand{\defint}[4]{ \int_{#3}^{#4} #1 \, d #2}
+\let\underdot=\d % rename builtin command \d{} to \underdot{}
+
+\renewcommand{\d}[2]{\frac{d #1}{d #2}} % for derivatives
+\newcommand{\dop}[2]{  \frac{d}{d #2} \left( #1 \right)  }
+\newcommand{\dopop}[2]{ \frac{d^2}{d^2 #2} \left( #1 \right) }
+\newcommand{\dd}[2]{\frac{d^2 #1}{d #2^2}} % for double derivatives
+
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\parop}[2]{ \frac{\partial}{\partial #2}  \left( #1 \right) }
+\newcommand{\paropop}[2]{ \frac{\partial^2}{\partial^2 #2} \left( #1 \right) }
+% for partial derivatives
+\renewcommand{\exp}[1]{\mathrm{exp \left( #1 \right)}}   %exp
+\newcommand{\Exp}[1]{\mathrm{e^{#1}}} %e^
+\renewcommand{\ln}[1]{\mathrm{ln \left( #1 \right)}}
+\newcommand{\pdd}[2]{\frac{\partial^2 #1}{\partial #2^2}}
+
+% for double partial derivatives
+
+\newcommand{\pdc}[3]{\left( \frac{\partial #1}{\partial #2}
+
+ \right)_{#3}} % for thermodynamic partial derivatives
+
+\newcommand{\ket}[1]{\left| #1 \right>} % for Dirac bras
+
+\newcommand{\bra}[1]{\left< #1 \right|} % for Dirac kets
+
+%\newcommand{\braket}[2]{\left< #1 \vphantom{#2} \right| \left. #2 \vphantom{#1} \right>} % for Dirac brackets
+
+\newcommand{\braket}[2]{\left< #1 \vphantom{#2} | #2 \vphantom{#1} \right>}
+
+\newcommand{\matrixel}[3]{\left< #1 \vphantom{#2#3} \right|
+
+ #2 \left| #3 \vphantom{#1#2} \right>} % for Dirac matrix elements
+
+\newcommand{\grad}[1]{\gv{\nabla} #1} % for gradient
+
+\let\divsymb=\div % rename builtin command \div to \divsymb
+
+\renewcommand{\div}[1]{\gv{\nabla} \cdot #1} % for divergence
+
+\newcommand{\curl}[1]{\gv{\nabla} \times #1} % for curl
+
+\newcommand{\paren}[1]{\left( #1\right)}
+\newcommand{\set}[1]{\lbrace #1\rbrace}
+\newcommand{\pset}[1]{\mathbb{P_{#1}}}
+\newcommand{\nset}[1]{\mathbb{N_{#1}}}
+\newcommand{\nbset}[1]{\mathbb{N_{b #1}}}
+
+
+
+\renewcommand{\ni}{\text{ such that }} % for derivatives
+
+
+
+%\newcommand{\contradiction}{{\hbox{%
+%    \setbox0=\hbox{$\mkern-3mu\times\mkern-3mu$}%
+%    \setbox1=\hbox to0pt{\hss$\times$\hss}%
+%    \copy0\raisebox{0.5\wd0}{\copy1}\raisebox{-0.5\wd0}{\box1}\box0
+%}}}
+
+\newcommand{\contradiction}{%
+\begin{tikzpicture}[rotate=45,x=0.5ex,y=0.5ex]
+\draw[line width=.2ex] (0,2) -- (3,2) (0,1) -- (3,1) (1,3) -- (1,0) (2,3) -- (2,0);
+\end{tikzpicture}
+}
+
+
+% THEOREMS -------------------------------------------------------
+
+\newtheorem{thm}{Theorem}[section]
+
+\newtheorem{cor}[thm]{Corollary}
+
+\newtheorem{lem}[thm]{Lemma}
+
+\newtheorem{prop}[thm]{Proposition}
+
+\newtheorem{axi}{Axiom}
+
+\newtheorem{step}{Step}
+%\theoremstyle{definition}
+
+\newtheorem{defn}[thm]{Definition}
+
+%\theoremstyle{remark}
+
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{conjecture}[thm]{Conjecture}
+\newtheorem{question}[thm]{Question}
+\numberwithin{equation}{section}
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{document}
+\title{AIGC=AGI : an Elegant Proof}
+\author{Prof Strange}
+\email{shit-no-email-yet@PIVOT}
+\affiliation{P.I.V.O.T. D.A.O.}
+
+
+
+\date{\today}
+
+
+\begin{abstract}
+Have you ever wondered why the public discussion of AIGC and AGI happened roughly at the same time? This paper proves that it is not a mere coincidence. 
+\end{abstract} 
+
+\maketitle
+
+
+
+
+\section{Introduction}
+
+AGI
+in contrast to AI
+specially intelligent while generally dumb
+
+nearly zero supervision from its creator
+
+in the sense that it can supervise itself
+
+
+
+
+
+
+% ============ END SECTION ============
+\section{Definition}
+
+\subsection{Information}
+Let $I_i$ denote information of event $i$ \cite{shannon} .
+\begin{equation}
+I_i:= - \log \dfrac{1}{p_i}
+\end{equation}
+\begin{equation}
+\left\langle I \right\rangle = \sum_i p_i \log(\frac{1}{p_i}) 
+\end{equation}
+
+Let $G$ denote the set of systems that is capable of outputting positive information on average.
+
+\subsection{Entropy}
+Let $S$ denote entropy. 
+\begin{equation}
+S:= - \sum_i p_i \log(p_i)
+\end{equation}
+
+\subsection{Life}
+Life, denoted $L$, is the set of systems that evade the decay to thermodynamical equilibrium by homeostatically maintaining negative entropy in an open system \cite{schrodinger_life}.
+
+\subsection{Algorithm}
+Let $A$ denote the set of algorithms. 
+
+\subsection{AGI}
+AGI, denoted $AGI$, is the set of system that we call AGI, or artificial general intelligence. 
+\begin{equation}
+AGI := L \cap A
+\end{equation}
+
+There are many motivations to define AGI in terms of life, 
+
+indeed lots of similarities. 
+
+An intelligent being has the capability to play the role of Maxwell's daemon\cite{deamon}. 
+
+
+\subsubsection{Necessariness}
+\subsubsection{Sufficientness}
+
+\subsection{AIGC}
+AIGC, or artificial intelligence generating content, denoted $AIGC$, is the set of artificial intelligence systems that is capable of outputting positive information on average.
+\begin{equation}
+AIGC := G \cap A
+\end{equation}
+
+
+
+% ============ END SECTION ============
+\section{Lemma}
+
+\begin{lem}
+\begin{equation}
+S=\left\langle I \right\rangle 
+\end{equation}
+\end{lem}
+
+
+\begin{lem}
+
+Outputting positive information is equivalent to inputting negative entropy.
+
+\begin{equation}
+G = L
+\end{equation}
+\end{lem}
+% ============ END SECTION ============
+\section{Theorem and Derivation}
+\begin{thm}
+\begin{equation}
+AIGC=AGI
+\end{equation}
+\end{thm}
+\textbf{Proof:}
+\begin{eqnarray}
+G&=&L\\
+G \cap A &=& L \cap A\\
+AIGC &=& AGI
+\end{eqnarray}
+Q.E.D.
+% ============ END SECTION ============
+\section{Conclusion}
+For life to be sustainable, it must be an open system and be able to dump entropy to the world. Likewise, an algorithmic life, or AGI, must be able to dump entropy to an algorithmic world\cite{worldModel}, and that's why only large models can be large enough to contain a model of the world. 
+
+% ============ END SECTION ============
+\bibliography{AIGC.bib}
+
+\end{document}
