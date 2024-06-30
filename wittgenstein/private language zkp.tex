@@ -31,13 +31,13 @@ The experimental setup is designed to test the operational capability of a priva
 \begin{itemize}
     \item \textbf{Observation Phase:} In each trial, indexed by \( i \), a random event, a coin flip, is generated, resulting in an outcome \( o_i \) which can be either head (H) or tail (T). This outcome is shown to the prover \( x \) and the verifier $y$. 
 
-    \item \textbf{Recording Phase:} Upon observing \( o_i \), \( x \) is tasked to write down a note of instructions \( n_i \) in its private language. These instructions are intended to direct \( x \) to later replicate the outcome \( o_i \) by manipulating a coin on a table. The verifier $y$ is unable to read, and not allowed to read $n_i$ (for example, encrypt $n_i$ using methods such and one-time pad). 
+    \item \textbf{Recording Phase:} Upon observing \( o_i \), \( x \) is tasked to write down a note of instructions \( n_i \) in its private language. These instructions are intended to direct \( x \) to later replicate the outcome \( o_i \) by manipulating a coin on a table. The verifier $y$ is unable to read, and is disallowed to read $n_i$ (for example, encrypt $n_i$ using methods such as one-time pad). 
 
     \item \textbf{Reset Phase:} After \( x \) records the instructions, its memory is reset to ensure that it retains no memory of \( o_i \) or \( n_i \) from the previous phase. The reset does not erase the private language ability of $x$. Likewise, the coin used for the initial flip is also reset to a random state on the table, removing any potential biases or marks.
 
     \item \textbf{Execution Phase:} \( x \) is then presented with the note \( n_i \), which contains the private instructions that no one else can understand. $x$ tries to execute the instructions in $n_i$.
 
-    \item \textbf{Outcome Verification:} Whether $x$ successfully executed the instructions, or misread the instructions, or completely failed to follow the instructions, the coin on the table would have a final state H or T, denoted as \( e_i \), and it is observed and recorded by the $y$, whom can simply check whether $e_i=o_i$. 
+    \item \textbf{Outcome Verification:} Whether $x$ successfully executed the instructions, or misread the instructions, or completely failed to follow the instructions, the coin on the table would have a final state H or T, denoted as \( e_i \), and it is observed and recorded by $y$, whom can simply check whether $e_i=o_i$. 
 
     \item \textbf{Repetition and Statistical Analysis:} This process is repeated across multiple independent trials \( m \) times. The consistency of \( x \)'s ability to match \( e_i \) with \( o_i \) is statistically analyzed. If \( x \) can successfully manipulate the coin to match the original flip outcome with high reliability, specifically with a confidence level of \( 1 - \frac{1}{2^m} \), it substantiates the claim that \( x \) operates using a coherent, yet private language.
 \end{itemize}
