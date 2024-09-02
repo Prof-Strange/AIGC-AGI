@@ -1,0 +1,174 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{amsthm}
+\usepackage{bbm}
+\usepackage{mathrsfs}
+\usepackage{amsfonts} %%% i.e. use 12pt type
+\usepackage[dvipsnames,usenames]{color}
+\usepackage{graphicx,latexsym,bm,amsmath,amssymb,verbatim,multicol,lscape}
+\usepackage{enumerate}
+\usepackage {cancel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{cite}
+\usepackage{hyperref}
+
+
+
+\usepackage{graphicx,latexsym,bm,amsmath,amssymb,verbatim,multicol,lscape}
+\usepackage{enumerate}
+\usepackage {cancel}
+% ----------------------------------------------------------------
+\vfuzz2pt % Don't report over-full v-boxes if over-edge is small
+\hfuzz2pt % Don't report over-full h-boxes if over-edge is small
+% THEOREMS -------------------------------------------------------
+\newtheorem{thm}{Theorem} [section]
+\newtheorem{lem}{Lemma}[section]
+\newtheorem{pro}{Proposition}[section]
+\newtheorem{cor}{Corollary}[section]
+\newtheorem{ass}{Assumption}[section]
+\newtheorem{exm}{Example}[section]
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}[section]
+\newtheorem{con}[thm]{Conjecture}
+\numberwithin{equation}{section}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\ind}{ind}
+\DeclareMathOperator{\rank}{rank}
+\allowdisplaybreaks
+% MATH -----------------------------------------------------------
+\newcommand{\norm}[1]{\left\Vert#1\right\Vert}
+\newcommand{\abs}[1]{\left\vert#1\right\vert}
+\newcommand{\set}[1]{\left\{#1\right\}}
+\newcommand{\Real}{\mathbb R}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\To}{\longrightarrow}
+\newcommand{\BX}{\mathbf{B}(X)}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\SSS}{\stackrel}
+
+
+
+\title{Signal-to-Computation Ratio: A Measure of System Complexity and Information Extraction}
+\author{J.L}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+In this paper, we introduce the concept of the Signal-to-Computation Ratio (SCR), a new metric for evaluating the computational efficiency required to extract information from a system. SCR is an intrinsic property of the system and is independent of the algorithm used. We define SCR mathematically and extend the concept to time-evolving dynamical systems.
+\end{abstract}
+
+\section{Introduction}
+In many computational tasks, the efficiency of extracting information from a system is of paramount importance. 
+While the signal-to-noise ratio (SNR) is a well-known metric in communication theory, we propose an analogous concept, the Signal-to-Computation Ratio (SCR), to measure the computational cost relative to the amount of information extracted from a system, if at-all possible. 
+The SCR is a system-specific property, reflecting how "difficult" it is to extract meaningful information from that system, irrespective of the specific algorithms used.
+
+The goal of this paper is to formalize SCR, explore its properties, and examine its applications.
+Furthermore, we investigate it  in the context of time-evolving dynamical systems. 
+
+
+
+\section{Definitions}
+
+\begin{defn}
+Let \( X = \{x_t\}_{t \in T} \) be a family of systems indexed by \( T \).
+The index set \( T \) can be finite, infinite, countable, or uncountable.
+Each element \( x_t \) represents a system at a particular index \( t \).
+\end{defn}
+
+\begin{defn}
+A Boolean question is a function \( q: X \rightarrow \{0, 1\} \).
+Given a  \( x_t \) system, the question \( q \) returns a binary response.
+Let $Q$ be the set of all such question. 
+\end{defn}
+
+\begin{pro}
+\begin{equation}
+q=q' \iff  \forall x_t \in X, q(x_t) = q'(x_t)
+\end{equation}
+\end{pro}
+
+\begin{defn}
+An algorithm is a function \( a: X \times D \rightarrow \{0, 1\} \), where \( D \) represents the available data the algorithm can use.
+\end{defn}
+\begin{defn}
+An algorithm \( a \) is said to implement a Boolean question \( q \) if, for all \( x_t \), \( a(x_t, d_{x_t}) = q(x_t) \).
+Two algorithms are considered equivalent if they implement the same Boolean question. In such cases, we denote the equivalence class of algorithm that implements $q$ as \( A_q \).
+\end{defn}
+
+\begin{defn}
+The computation consumption of an algorithm \( s: A \rightarrow \mathbb{R}^+ \) measures the resource cost associated with executing the algorithm.
+For a Boolean question \( q \), the computation consumption \( c(q) \) is defined as the minimum consumption over all algorithms \( a_q \) that implement the question \( q \).
+Formally, \( c(q) = \min_{a_q} s(a_q) \).
+\end{defn}
+
+\begin{defn}
+The function \( e_x(n) \) represents the least computation needed to extract \( n \) bits of information from the system \( x \).
+It is defined as:
+\[
+e_x(n) := \inf_{\{x \in 2^Q : |x| = n\}} \sum_{q \in x} c(q)
+\]
+where \( Q \) is the set of all Boolean questions.
+The infimum is taken over all subsets of \( Q \) that extract exactly \( n \) bits of information.
+\end{defn}
+
+
+
+\section{Boolean Questions and Algorithms}
+Let \(X = \{x_t\}_{t \in T}\) represent a family of systems indexed by \(T\), where \(T\) could be finite, infinite, countable, or uncountable. We define a Boolean question \(q: X \rightarrow \{0, 1\}\), which represents a query about the system that yields a binary response.
+
+An algorithm \(a: X \times D \rightarrow \{0, 1\}\) is a process that uses available data \(D\) to answer the question \(q\). We say that an algorithm \(a\) implements a question \(q\) if for all \(t\), \(a(x_t, d_t) = q(x_t)\). In such cases, we denote the algorithm as \(a_q\). Two algorithms are considered equivalent if they implement the same question.
+
+\section{Computation Consumption}
+We define the computation consumption \(s(a)\) as the resource cost associated with an algorithm \(a\). Similarly, we define \(c(q)\) as the least computational consumption needed to answer a question \(q \in Q\), optimized over all possible algorithms that implement \(q\):
+\[
+c(q) = \min_{a_q} s(a_q)
+\]
+Thus, \(c(q)\) is a lower bound on the computational effort required to extract the information associated with question \(q\).
+
+\section{Least Computation to Extract Information}
+The function \(e_x(n)\) represents the least computation needed to extract \(n\) bits of information from the system \(x\). Formally, it is defined as:
+\[
+e_x(n) := \inf_{\{x \in 2^Q : |x|=n\}} \sum_{q \in x} c(q)
+\]
+Here, \(Q\) is the set of all Boolean questions, and the infimum is taken over all subsets of \(Q\) that extract exactly \(n\) bits of information.
+
+\section{Time-Evolving Dynamical Systems}
+In many real-world applications, the systems of interest are time-evolving. Let \(x_t\) represent the state of a dynamical system at time \(t\). In this context, information extraction often involves considering the entire trajectory of the system over a time interval, rather than a single snapshot.
+
+We adapt the definition of SCR for such systems by considering the computational effort required to extract \(n\) bits of information from the system's trajectory:
+\[
+\text{SCR}(x_t) = \frac{n}{e_{x_t}(n)}
+\]
+where \(e_{x_t}(n)\) denotes the minimal computation required to extract \(n\) bits of information from the system's evolution over time.
+
+\section{Impact of Trivial Questions}
+Consider the scenario where the set of Boolean questions \(Q\) is flooded with trivial questions—questions that always return the same value (e.g., always 0 or always 1), regardless of the input system. These questions have minimal computation consumption, as their answers do not depend on the system's state.
+
+The presence of a large number of trivial questions can skew the calculation of the minimal computation \(e_x(n)\). Specifically, it can artificially lower the perceived computational cost, leading to an inflated SCR. To address this issue, we need to carefully distinguish between trivial and non-trivial questions when calculating \(e_x(n)\) to ensure that the SCR reflects meaningful information extraction rather than simple, uninformative queries.
+
+\section{Conclusion and Future Work}
+In this paper, we introduced the concept of Signal-to-Computation Ratio (SCR) as a measure of the computational efficiency required to extract information from a system. We defined SCR mathematically and explored its properties, especially in the context of time-evolving dynamical systems. Additionally, we discussed the impact of trivial questions on the computation consumption and proposed methods to address these issues.
+
+Future work in this area could involve refining the definition of SCR for more complex systems, including those with stochastic behavior, and exploring practical applications in fields such as machine learning, cryptography, and information theory. Moreover, further investigation into the optimization of algorithms for maximizing SCR could lead to new insights into efficient information extraction methods.
+
+\section{References}
+\begin{thebibliography}{99}
+    \bibitem{reference1}
+    Shannon, C. E., \textit{A Mathematical Theory of Communication}, Bell System Technical Journal, vol. 27, pp. 379–423, 1948.
+    
+    \bibitem{reference2}
+    Cover, T. M., and Thomas, J. A., \textit{Elements of Information Theory}, Wiley-Interscience, 2006.
+    
+    \bibitem{reference3}
+    Turing, A. M., \textit{On Computable Numbers, with an Application to the Entscheidungsproblem}, Proceedings of the London Mathematical Society, vol. 2, issue 42, pp. 230-265, 1936.
+\end{thebibliography}
+
+\end{document}
