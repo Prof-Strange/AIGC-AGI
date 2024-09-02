@@ -45,6 +45,7 @@
 \newcommand{\abs}[1]{\left\vert#1\right\vert}
 \newcommand{\set}[1]{\left\{#1\right\}}
 \newcommand{\Real}{\mathbb R}
+\newcommand{\Natural}{\mathbb N}
 \newcommand{\eps}{\varepsilon}
 \newcommand{\To}{\longrightarrow}
 \newcommand{\BX}{\mathbf{B}(X)}
@@ -86,7 +87,7 @@ Each element \( x_t \) represents a system at a particular index \( t \).
 \begin{defn}
 A Boolean question is a function \( q: X \rightarrow \{0, 1\} \).
 Given a  \( x_t \) system, the question \( q \) returns a binary response.
-Let $Q$ be the set of all such question. 
+Let $Q$ be the set of such questions chosen to be ``meaningful'' and ``solvable''. 
 \end{defn}
 
 \begin{pro}
@@ -99,24 +100,52 @@ q=q' \iff  \forall x_t \in X, q(x_t) = q'(x_t)
 An algorithm is a function \( a: X \times D \rightarrow \{0, 1\} \), where \( D \) represents the available data the algorithm can use.
 \end{defn}
 \begin{defn}
-An algorithm \( a \) is said to implement a Boolean question \( q \) if, for all \( x_t \), \( a(x_t, d_{x_t}) = q(x_t) \).
-Two algorithms are considered equivalent if they implement the same Boolean question. In such cases, we denote the equivalence class of algorithm that implements $q$ as \( A_q \).
+An algorithm \( a \) is said to implement a Boolean question \( q \) if, $\forall  x_t \in X , a(x_t, d_{x_t}) = q(x_t) $, where $d_{x_t}$ is the available data of $x_t$.
+Two algorithms are considered equivalent if they implement the same Boolean question $q$. 
+\begin{equation}
+a \sim a' \iff  
+\exists q\in Q, \forall  x_t \in X , a(x_t, d_{x_t}) = q(x_t)  =a'(x_t, d_{x_t})
+\end{equation}
+In such cases, we denote the equivalence class of algorithm that implements $q$ as \( A_q \).
+$A_q \neq \emptyset$, because we only consider ``solvable" questions $q\in Q$. 
+
 \end{defn}
 
 \begin{defn}
-The computation consumption of an algorithm \( s: A \rightarrow \mathbb{R}^+ \) measures the resource cost associated with executing the algorithm.
-For a Boolean question \( q \), the computation consumption \( c(q) \) is defined as the minimum consumption over all algorithms \( a_q \) that implement the question \( q \).
-Formally, \( c(q) = \min_{a_q} s(a_q) \).
+The computation resource cost of an algorithm 
+\begin{equation}
+s: A \times X \times D  \rightarrow \mathbb{R}^+ 
+\end{equation}
+ measures the computation resource cost associated with executing the algorithm.
+ \end{defn}
+
+
+
+
+\begin{defn}
+The computation resource cost of a question $q$ about system $x_t$,
+\begin{equation}
+c: Q \times X  \rightarrow \mathbb{R}^+ 
+\end{equation}
+is defined as the minimum consumption over all algorithms \( A_q \) that implement the question \( q \).
+Formally, 
+\begin{equation}
+ c(q,x_t)  := \min_{a \in A_q } s(a,x_t,d_{x_t}) 
+\end{equation}
+
 \end{defn}
 
 \begin{defn}
-The function \( e_x(n) \) represents the least computation needed to extract \( n \) bits of information from the system \( x \).
+\begin{equation}
+e:\Natural \rightarrow \Real^+
+\end{equation}
+The function \( e_x(n) \) represents the least computation resource cost to extract \( n \) bits of information from the system \( x_t \).
 It is defined as:
-\[
-e_x(n) := \inf_{\{x \in 2^Q : |x| = n\}} \sum_{q \in x} c(q)
-\]
-where \( Q \) is the set of all Boolean questions.
-The infimum is taken over all subsets of \( Q \) that extract exactly \( n \) bits of information.
+\begin{equation}
+e_{x_t}(n) := \min_{\{\mathfrak{Q} \in 2^Q : |\mathfrak{Q}| = n\}} \sum_{q \in \mathfrak{Q}} c(q,x_t)
+\end{equation}
+
+The min is taken over all combination of $n$ questions chosen from \( Q \). 
 \end{defn}
 
 
@@ -126,8 +155,8 @@ Let \(X = \{x_t\}_{t \in T}\) represent a family of systems indexed by \(T\), wh
 
 An algorithm \(a: X \times D \rightarrow \{0, 1\}\) is a process that uses available data \(D\) to answer the question \(q\). We say that an algorithm \(a\) implements a question \(q\) if for all \(t\), \(a(x_t, d_t) = q(x_t)\). In such cases, we denote the algorithm as \(a_q\). Two algorithms are considered equivalent if they implement the same question.
 
-\section{Computation Consumption}
-We define the computation consumption \(s(a)\) as the resource cost associated with an algorithm \(a\). Similarly, we define \(c(q)\) as the least computational consumption needed to answer a question \(q \in Q\), optimized over all possible algorithms that implement \(q\):
+\section{computation resource cost}
+We define the computation resource cost \(s(a)\) as the resource cost associated with an algorithm \(a\). Similarly, we define \(c(q)\) as the least computational consumption needed to answer a question \(q \in Q\), optimized over all possible algorithms that implement \(q\):
 \[
 c(q) = \min_{a_q} s(a_q)
 \]
@@ -150,12 +179,12 @@ We adapt the definition of SCR for such systems by considering the computational
 where \(e_{x_t}(n)\) denotes the minimal computation required to extract \(n\) bits of information from the system's evolution over time.
 
 \section{Impact of Trivial Questions}
-Consider the scenario where the set of Boolean questions \(Q\) is flooded with trivial questions—questions that always return the same value (e.g., always 0 or always 1), regardless of the input system. These questions have minimal computation consumption, as their answers do not depend on the system's state.
+Consider the scenario where the set of Boolean questions \(Q\) is flooded with trivial questions—questions that always return the same value (e.g., always 0 or always 1), regardless of the input system. These questions have minimal computation resource cost, as their answers do not depend on the system's state.
 
 The presence of a large number of trivial questions can skew the calculation of the minimal computation \(e_x(n)\). Specifically, it can artificially lower the perceived computational cost, leading to an inflated SCR. To address this issue, we need to carefully distinguish between trivial and non-trivial questions when calculating \(e_x(n)\) to ensure that the SCR reflects meaningful information extraction rather than simple, uninformative queries.
 
 \section{Conclusion and Future Work}
-In this paper, we introduced the concept of Signal-to-Computation Ratio (SCR) as a measure of the computational efficiency required to extract information from a system. We defined SCR mathematically and explored its properties, especially in the context of time-evolving dynamical systems. Additionally, we discussed the impact of trivial questions on the computation consumption and proposed methods to address these issues.
+In this paper, we introduced the concept of Signal-to-Computation Ratio (SCR) as a measure of the computational efficiency required to extract information from a system. We defined SCR mathematically and explored its properties, especially in the context of time-evolving dynamical systems. Additionally, we discussed the impact of trivial questions on the computation resource cost and proposed methods to address these issues.
 
 Future work in this area could involve refining the definition of SCR for more complex systems, including those with stochastic behavior, and exploring practical applications in fields such as machine learning, cryptography, and information theory. Moreover, further investigation into the optimization of algorithms for maximizing SCR could lead to new insights into efficient information extraction methods.
 
