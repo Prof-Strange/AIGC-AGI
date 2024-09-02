@@ -85,7 +85,7 @@ Each element \( x_t \) represents a system at a particular index \( t \).
 \end{defn}
 
 \begin{defn}
-A Boolean question is a function \( q: X \rightarrow \{0, 1\} \).
+A Boolean question is a function \( q: X \rightarrow \{0, 1\} \), which represents a query about the system that yields a binary response.
 Given a  \( x_t \) system, the question \( q \) returns a binary response.
 Let $Q$ be the set of such questions chosen to be ``meaningful'' and ``solvable''. 
 \end{defn}
@@ -97,7 +97,11 @@ q=q' \iff  \forall x_t \in X, q(x_t) = q'(x_t)
 \end{pro}
 
 \begin{defn}
-An algorithm is a function \( a: X \times D \rightarrow \{0, 1\} \), where \( D \) represents the available data the algorithm can use.
+\begin{equation}
+a: Q \times D \rightarrow \{0, 1\}
+\end{equation}
+
+An algorithm is a function $a(q,d)$ that solves a question $q\in Q$, given data $d \in D$
 \end{defn}
 \begin{defn}
 An algorithm \( a \) is said to implement a Boolean question \( q \) if, $\forall  x_t \in X , a(x_t, d_{x_t}) = q(x_t) $, where $d_{x_t}$ is the available data of $x_t$.
@@ -151,7 +155,7 @@ The min is taken over all combination of $n$ questions chosen from \( Q \).
 
 
 \section{Boolean Questions and Algorithms}
-Let \(X = \{x_t\}_{t \in T}\) represent a family of systems indexed by \(T\), where \(T\) could be finite, infinite, countable, or uncountable. We define a Boolean question \(q: X \rightarrow \{0, 1\}\), which represents a query about the system that yields a binary response.
+Let \(X = \{x_t\}_{t \in T}\) represent a family of systems indexed by \(T\), where \(T\) could be finite, infinite, countable, or uncountable. We define a Boolean question \(q: X \rightarrow \{0, 1\}\)
 
 An algorithm \(a: X \times D \rightarrow \{0, 1\}\) is a process that uses available data \(D\) to answer the question \(q\). We say that an algorithm \(a\) implements a question \(q\) if for all \(t\), \(a(x_t, d_t) = q(x_t)\). In such cases, we denote the algorithm as \(a_q\). Two algorithms are considered equivalent if they implement the same question.
 
