@@ -43,7 +43,8 @@
 % MATH -----------------------------------------------------------
 \newcommand{\norm}[1]{\left\Vert#1\right\Vert}
 \newcommand{\abs}[1]{\left\vert#1\right\vert}
-\newcommand{\set}[1]{\left\{#1\right\}}
+\newcommand{\set}[1]{\left\lbrace #1 \right\rbrace}
+\newcommand{\p}[1]{\left( #1 \right)}
 \newcommand{\Real}{\mathbb R}
 \newcommand{\Natural}{\mathbb N}
 \newcommand{\eps}{\varepsilon}
@@ -75,36 +76,58 @@ The goal of this paper is to formalize SCR, explore its properties, and examine 
 Furthermore, we investigate it  in the context of time-evolving dynamical systems. 
 
 
-
+\newpage
 \section{Definitions}
 
+
+\subsection{Family of Systems}
 \begin{defn}
-Let \( X = \{x_t\}_{t \in T} \) be a family of systems indexed by \( T \).
+\begin{equation}
+X := \{x_t\}_{t \in T}
+\end{equation}
+Let \( X \) be a family of systems indexed by \( T \).
 The index set \( T \) can be finite, infinite, countable, or uncountable.
 Each element \( x_t \) represents a system at a particular index \( t \).
 \end{defn}
 
+
+\subsection{Question}
 \begin{defn}
-A Boolean question is a function \( q: X \rightarrow \{0, 1\} \), which represents a query about the system that yields a binary response.
-Given a  \( x_t \) system, the question \( q \) returns a binary response.
-Let $Q$ be the set of such questions chosen to be ``meaningful'' and ``solvable''. 
+\begin{equation}
+Q:= \set{q: X \rightarrow \{0, 1\}}
+\end{equation}
 \end{defn}
 
 \begin{pro}
 \begin{equation}
-q=q' \iff  \forall x_t \in X, q(x_t) = q'(x_t)
+\forall q,q'\in Q, q=q' \iff  \forall x_t \in X, q(x_t) = q'(x_t)
 \end{equation}
 \end{pro}
 
+\begin{pro}
+\begin{equation}
+\forall q,q'\in Q, q\sim q' \iff ?
+\end{equation}
+\end{pro}
+
+
+\subsection{Measurement}
 \begin{defn}
 \begin{equation}
-a: Q \times D \rightarrow \{0, 1\}
+M:=\set{m:X \rightarrow D}
 \end{equation}
-
-An algorithm is a function $a(q,d)$ that solves a question $q\in Q$, given data $d \in D$
 \end{defn}
+
+\subsection{Algorithm}
 \begin{defn}
-An algorithm \( a \) is said to implement a Boolean question \( q \) if, $\forall  x_t \in X , a(x_t, d_{x_t}) = q(x_t) $, where $d_{x_t}$ is the available data of $x_t$.
+\begin{equation}
+A := \set{a: D \rightarrow \{0, 1\}}
+\end{equation}
+\end{defn}
+
+
+\begin{defn}
+An algorithm \( a \in A  \) is said to implement a Boolean question \( q \in Q  \) iff, $\forall  x_t \in X , a(x_t, d_{x_t}) = q(x_t) $, where $d_{x_t}$ is the available data of $x_t$.
 Two algorithms are considered equivalent if they implement the same Boolean question $q$. 
 \begin{equation}
 a \sim a' \iff  
@@ -112,13 +135,16 @@ a \sim a' \iff
 \end{equation}
 In such cases, we denote the equivalence class of algorithm that implements $q$ as \( A_q \).
 $A_q \neq \emptyset$, because we only consider ``solvable" questions $q\in Q$. 
-
 \end{defn}
+
+
+
+
 
 \begin{defn}
 The computation resource cost of an algorithm 
 \begin{equation}
-s: A \times X \times D  \rightarrow \mathbb{R}^+ 
+s: A \times Q \times D  \rightarrow \mathbb{R}^+ 
 \end{equation}
  measures the computation resource cost associated with executing the algorithm.
  \end{defn}
@@ -129,7 +155,7 @@ s: A \times X \times D  \rightarrow \mathbb{R}^+
 \begin{defn}
 The computation resource cost of a question $q$ about system $x_t$,
 \begin{equation}
-c: Q \times X  \rightarrow \mathbb{R}^+ 
+c: Q \times D  \rightarrow \mathbb{R}^+ 
 \end{equation}
 is defined as the minimum consumption over all algorithms \( A_q \) that implement the question \( q \).
 Formally, 
