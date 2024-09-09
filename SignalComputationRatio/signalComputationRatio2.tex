@@ -74,7 +74,7 @@ In this paper, we introduce the concept of the Signal-to-Computation Ratio (SCR)
 \end{abstract}
 
 \section{Introduction}
-In many computational tasks, the efficiency of extracting information from a system is of paramount importance. 
+In many complex systems, the efficiency of extracting information from a system is of paramount importance. 
 While the signal-to-noise ratio (SNR) is a well-known metric in communication theory, we propose an analogous concept, the Signal-to-Computation Ratio (SCR), to measure the computational cost relative to the amount of information extracted from a system, if at-all possible. 
 The SCR is a system-specific property, reflecting how "difficult" it is to extract meaningful information from that system, irrespective of the specific algorithms used.
 
@@ -91,7 +91,9 @@ The system is defined as follows:
 X := \{ x_t \}_{t \in T}
 \]
 
-This represents a set of elements indexed by time or another parameter $T$.
+where $T$ is the index set.
+This family represents the various system states, indexed by $t\in T$, 
+$t$ might represent time or any other indexing parameter.
 
 \subsection{Binary Query}
 
