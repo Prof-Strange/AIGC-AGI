@@ -74,9 +74,16 @@ In this paper, we introduce the concept of the Signal-to-Computation Ratio (SCR)
 \end{abstract}
 
 \section{Introduction}
-In computational systems, efficient query processing and resource management are critical for performance optimization. This paper proposes a framework that formalizes these concepts in terms of binary queries, binary algorithms, and computation resource costs. The framework introduces the concept of a sandbox to explore how different data and computational structures interact. The notion of extraction cost and System Computational Resource (SCR) are introduced as metrics to assess system efficiency. This framework is then applied to dynamical systems, providing insights into the computational efficiency of binary queries over time.
+In many computational tasks, the efficiency of extracting information from a system is of paramount importance. 
+While the signal-to-noise ratio (SNR) is a well-known metric in communication theory, we propose an analogous concept, the Signal-to-Computation Ratio (SCR), to measure the computational cost relative to the amount of information extracted from a system, if at-all possible. 
+The SCR is a system-specific property, reflecting how "difficult" it is to extract meaningful information from that system, irrespective of the specific algorithms used.
 
-\section{System}
+The goal of this paper is to formalize SCR, explore its properties, and examine its applications.
+Furthermore, we investigate it  in the context of time-evolving dynamical systems. 
+
+\section{Definitions}
+
+\subsection{System}
 
 The system is defined as follows:
 
@@ -86,7 +93,7 @@ X := \{ x_t \}_{t \in T}
 
 This represents a set of elements indexed by time or another parameter $T$.
 
-\section{Binary Query}
+\subsection{Binary Query}
 
 We define the binary set $\mathbb{B}$ and the set of binary queries $Q$ as follows:
 
@@ -109,7 +116,7 @@ Furthermore, two queries $q$ and $q'$ are considered equivalent under a transfor
 \forall q, q' \in Q, \quad q \sim q' \iff \exists f \in \amalg, \forall x_t \in X, f \circ q(x_t) = q'(x_t)
 \]
 
-\section{Horizon}
+\subsection{Horizon}
 
 The horizon $H$ is defined as the set of functions that map elements of $X$ to data:
 
@@ -119,7 +126,7 @@ H = \{ h : X \rightarrow D \}
 
 Each $h \in H$ reflects the information available about $x \in X$.
 
-\section{Sandbox}
+\subsection{Sandbox}
 
 The sandbox $S$ is defined as the Cartesian product of $X$ and $H$:
 
@@ -129,7 +136,7 @@ S := X \times H
 
 In this framework, instead of writing $(x_t, h) \in S$, we use the notation $x_t | h \in S$.
 
-\section{Binary Algorithm}
+\subsection{Binary Algorithm}
 
 A binary algorithm processes some data $d \in D$ and outputs a single bit:
 
@@ -155,7 +162,7 @@ The set of algorithms corresponding to a query $q$ under horizon $h$ is denoted 
 A_{q|h} := \{ a \in A : a \underset{h}{\rightsquigarrow} q \}
 \]
 
-\section{Meaningful Questions Set}
+\subsection{Meaningful Questions Set}
 
 The set of meaningful questions under horizon $h$ is defined as:
 
@@ -163,7 +170,7 @@ The set of meaningful questions under horizon $h$ is defined as:
 Q^*_h := \left\{ q \in \frac{Q}{\sim} : \exists a \in A , a \underset{h}{\rightsquigarrow} q \right\}
 \]
 
-\section{Computation Resource}
+\subsection{Computation Resource}
 
 The computation resource cost $\mathfrak{c}(a,d)$ is the cost of computing $a(d)$:
 
@@ -180,7 +187,7 @@ c : S \rightarrow (Q \rightarrow \mathbb{R}^+)
 c_{x_t|h}(q) := \min_{a \in A_{q|h}} \mathfrak{c}(a, h(x_t))
 \]
 
-\section{Extraction Cost}
+\subsection{Extraction Cost}
 
 The extraction cost $e_{x_t|h}(n)$ is the total computation resource cost to extract $n$ bits of information from the sandbox $x_t|h$:
 
@@ -191,7 +198,7 @@ e : S \rightarrow (\mathbb{N} \rightarrow \mathbb{R}^+)
 e_{x_t|h}(n) := \min_{\left\{ \Omega \subseteq Q^*_h : |\Omega| = n \right\}} \sum_{q \in \Omega} c_{x_t|h}(q)
 \]
 
-\section{System Computational Resource (SCR)}
+\subsection{System Computational Resource (SCR)}
 
 The System Computational Resource (SCR) is defined as:
 
