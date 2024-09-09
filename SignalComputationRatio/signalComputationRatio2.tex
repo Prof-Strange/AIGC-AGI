@@ -164,14 +164,15 @@ The set of algorithms implementing a query $q$ under horizon $h$ is denoted as:
 A_{q|h} := \{ a \in A : a \underset{h}{\rightsquigarrow} q \}
 \]
 
-\subsection{Meaningful Questions Set}
+\subsection{Meaningful Query Set}
 
-The set of meaningful questions under horizon $h$ is defined as:
+The set of meaningful query under horizon $h$ is defined as:
 
 \[
 Q^*_h := \left\{ q \in \frac{Q}{\sim} : \exists a \in A , a \underset{h}{\rightsquigarrow} q \right\}
 \]
 
+The set essentially eliminates unimplementable queries and redundant (defined by $\sim$) queries. 
 \subsection{Computation Resource}
 
 The computation resource cost $\mathfrak{c}(a,d)$ is the cost of computing $a(d)$:
