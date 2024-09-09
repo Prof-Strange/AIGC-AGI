@@ -106,13 +106,13 @@ We define the binary set $\mathbb{B}$ and the set of binary queries $Q$ as follo
 Q := \{ q : X \rightarrow \mathbb{B} \}
 \]
 
-Two binary queries $q$ and $q'$ are considered identical if they return the same output for all elements of $X$:
+Two binary queries $q$ and $q'$ are considered identical if they return the same output for all systems $x_t \in X$:
 
 \[
 \forall q, q' \in Q, \quad q = q' \iff \forall x_t \in X, q(x) = q'(x)
 \]
 
-Furthermore, two queries $q$ and $q'$ are considered equivalent under a transformation $f$ from the set $\amalg$ of invertible functions:
+Furthermore, two queries $q$ and $q'$ are considered equivalent upto a transformation $f$ from the set $\amalg$ of inver-table functions:
 
 \[
 \forall q, q' \in Q, \quad q \sim q' \iff \exists f \in \amalg, \forall x_t \in X, f \circ q(x_t) = q'(x_t)
