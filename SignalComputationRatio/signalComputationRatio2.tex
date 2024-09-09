@@ -120,7 +120,7 @@ Furthermore, two queries $q$ and $q'$ are considered equivalent upto a transform
 
 \subsection{Horizon}
 
-The horizon $H$ is defined as the set of functions that map a system $x_t \in X$ to its available data:
+The horizon $H$ is defined as the set of functions that map a system $x_t \in X$ to its obtainable data:
 
 \[
 H = \{ h : X \rightarrow D \}
@@ -130,13 +130,13 @@ Each $h \in H$ reflects the data obtainable about $x_t \in X$.
 
 \subsection{Sandbox}
 
-The sandbox $S$ is defined as the Cartesian product of $X$ and $H$:
+The sandbox $S$ is defined as a system paired with its horizon:
 
 \[
 S := X \times H
 \]
 
-In this framework, instead of writing $(x_t, h) \in S$, we use the notation $x_t | h \in S$.
+Notationally, instead of writing $(x_t, h) \in S$, we use the notation $x_t | h \in S$.
 
 \subsection{Binary Algorithm}
 
