@@ -146,19 +146,19 @@ A binary algorithm processes some data $d \in D$ and outputs a single bit:
 A := \{ a : D \rightarrow \mathbb{B} \}
 \]
 
-For $a \in A$, $q \in Q$, and $h \in H$, the relationship between an algorithm and a query is defined as:
+For $a \in A$, $q \in Q$, and $h \in H$,  an algorithm implementing a query under $h$ is defined as:
 
 \[
 a \underset{h}{\rightsquigarrow} q \iff \forall x_t \in X, q(x_t) = a(h(x_t))
 \]
 
-Two binary algorithms $a$ and $a'$ are considered equivalent under $h$ if they produce equivalent queries:
+Two binary algorithms $a$ and $a'$ are considered equivalent under $h$ if they implement a same query:
 
 \[
 a \underset{h}{\sim} a' \iff \exists q \in Q , a \underset{h}{\rightsquigarrow}q \wedge a' \underset{h}{\rightsquigarrow}q
 \]
 
-The set of algorithms corresponding to a query $q$ under horizon $h$ is denoted as:
+The set of algorithms implementing a query $q$ under horizon $h$ is denoted as:
 
 \[
 A_{q|h} := \{ a \in A : a \underset{h}{\rightsquigarrow} q \}
