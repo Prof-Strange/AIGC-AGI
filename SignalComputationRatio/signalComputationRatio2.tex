@@ -1,0 +1,226 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{amsthm}
+\usepackage{bbm}
+\usepackage{mathrsfs}
+\usepackage{amsfonts} %%% i.e. use 12pt type
+\usepackage[dvipsnames,usenames]{color}
+\usepackage{graphicx,latexsym,bm,amsmath,amssymb,verbatim,multicol,lscape}
+\usepackage{enumerate}
+\usepackage {cancel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{cite}
+\usepackage{hyperref}
+
+
+
+\usepackage{graphicx,latexsym,bm,amsmath,amssymb,verbatim,multicol,lscape}
+\usepackage{enumerate}
+\usepackage {cancel}
+% ----------------------------------------------------------------
+\vfuzz2pt % Don't report over-full v-boxes if over-edge is small
+\hfuzz2pt % Don't report over-full h-boxes if over-edge is small
+% THEOREMS -------------------------------------------------------
+\newtheorem{thm}{Theorem} [section]
+\newtheorem{lem}{Lemma}[section]
+\newtheorem{pro}{Proposition}[section]
+\newtheorem{cor}{Corollary}[section]
+\newtheorem{ass}{Assumption}[section]
+\newtheorem{exm}{Example}[section]
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}[section]
+\newtheorem{con}[thm]{Conjecture}
+\numberwithin{equation}{section}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\ind}{ind}
+\DeclareMathOperator{\rank}{rank}
+\allowdisplaybreaks
+% MATH -----------------------------------------------------------
+\newcommand{\norm}[1]{\left\Vert#1\right\Vert}
+\newcommand{\abs}[1]{\left\vert#1\right\vert}
+\newcommand{\set}[1]{\left\lbrace #1 \right\rbrace}
+\newcommand{\p}[1]{\left( #1 \right)}
+\newcommand{\Real}{\mathbb R}
+\newcommand{\Natural}{\mathbb N}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\To}{\longrightarrow}
+\newcommand{\BX}{\mathbf{B}(X)}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\SSS}{\stackrel}
+
+
+
+\title{Signal-to-Computation Ratio: A Measure of System Complexity and Information Extraction}
+\author{J.L}
+\date{\today}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This paper presents a formal framework for analyzing binary queries and computational resource efficiency in a dynamic system. The system consists of a set of queries and binary algorithms, coupled with a sandbox environment to explore the interaction between data and computation costs. We define key concepts such as the horizon, sandbox, and extraction cost, leading to a new metric for evaluating system efficiency: the System Computational Resource (SCR). This metric is further applied to dynamical systems to quantify computational efficiency over time.
+\end{abstract}
+
+\section{Introduction}
+In computational systems, efficient query processing and resource management are critical for performance optimization. This paper proposes a framework that formalizes these concepts in terms of binary queries, binary algorithms, and computation resource costs. The framework introduces the concept of a sandbox to explore how different data and computational structures interact. The notion of extraction cost and System Computational Resource (SCR) are introduced as metrics to assess system efficiency. This framework is then applied to dynamical systems, providing insights into the computational efficiency of binary queries over time.
+
+\section{System}
+
+The system is defined as follows:
+
+\[
+X := \{ x_t \}_{t \in T}
+\]
+
+This represents a set of elements indexed by time or another parameter $T$.
+
+\section{Binary Query}
+
+We define the binary set $\mathbb{B}$ and the set of binary queries $Q$ as follows:
+
+\[
+\mathbb{B} := \{ 0, 1 \}
+\]
+\[
+Q := \{ q : X \rightarrow \mathbb{B} \}
+\]
+
+Two binary queries $q$ and $q'$ are considered identical if they return the same output for all elements of $X$:
+
+\[
+\forall q, q' \in Q, \quad q = q' \iff \forall x_t \in X, q(x) = q'(x)
+\]
+
+Furthermore, two queries $q$ and $q'$ are considered equivalent under a transformation $f$ from the set $\amalg$ of invertible functions:
+
+\[
+\forall q, q' \in Q, \quad q \sim q' \iff \exists f \in \amalg, \forall x_t \in X, f \circ q(x_t) = q'(x_t)
+\]
+
+\section{Horizon}
+
+The horizon $H$ is defined as the set of functions that map elements of $X$ to data:
+
+\[
+H = \{ h : X \rightarrow D \}
+\]
+
+Each $h \in H$ reflects the information available about $x \in X$.
+
+\section{Sandbox}
+
+The sandbox $S$ is defined as the Cartesian product of $X$ and $H$:
+
+\[
+S := X \times H
+\]
+
+In this framework, instead of writing $(x_t, h) \in S$, we use the notation $x_t | h \in S$.
+
+\section{Binary Algorithm}
+
+A binary algorithm processes some data $d \in D$ and outputs a single bit:
+
+\[
+A := \{ a : D \rightarrow \mathbb{B} \}
+\]
+
+For $a \in A$, $q \in Q$, and $h \in H$, the relationship between an algorithm and a query is defined as:
+
+\[
+a \underset{h}{\rightsquigarrow} q \iff \forall x_t \in X, q(x_t) = a(h(x_t))
+\]
+
+Two binary algorithms $a$ and $a'$ are considered equivalent under $h$ if they produce equivalent queries:
+
+\[
+a \underset{h}{\sim} a' \iff \exists q \in Q , a \underset{h}{\rightsquigarrow}q \wedge a' \underset{h}{\rightsquigarrow}q
+\]
+
+The set of algorithms corresponding to a query $q$ under horizon $h$ is denoted as:
+
+\[
+A_{q|h} := \{ a \in A : a \underset{h}{\rightsquigarrow} q \}
+\]
+
+\section{Meaningful Questions Set}
+
+The set of meaningful questions under horizon $h$ is defined as:
+
+\[
+Q^*_h := \left\{ q \in \frac{Q}{\sim} : \exists a \in A , a \underset{h}{\rightsquigarrow} q \right\}
+\]
+
+\section{Computation Resource}
+
+The computation resource cost $\mathfrak{c}(a,d)$ is the cost of computing $a(d)$:
+
+\[
+\mathfrak{c} : A \times D \rightarrow \mathbb{R}^+
+\]
+
+The computation resource cost associated with a question $q$, given sandbox $x_t|h$, is:
+
+\[
+c : S \rightarrow (Q \rightarrow \mathbb{R}^+)
+\]
+\[
+c_{x_t|h}(q) := \min_{a \in A_{q|h}} \mathfrak{c}(a, h(x_t))
+\]
+
+\section{Extraction Cost}
+
+The extraction cost $e_{x_t|h}(n)$ is the total computation resource cost to extract $n$ bits of information from the sandbox $x_t|h$:
+
+\[
+e : S \rightarrow (\mathbb{N} \rightarrow \mathbb{R}^+)
+\]
+\[
+e_{x_t|h}(n) := \min_{\left\{ \Omega \subseteq Q^*_h : |\Omega| = n \right\}} \sum_{q \in \Omega} c_{x_t|h}(q)
+\]
+
+\section{System Computational Resource (SCR)}
+
+The System Computational Resource (SCR) is defined as:
+
+\[
+SCR : S \rightarrow (\mathbb{N} \rightarrow \mathbb{R}^+)
+\]
+\[
+SCR_{x_t|h}(n) := \frac{n}{e_{x_t|h}(n)}
+\]
+
+\section{Application to Dynamical Systems}
+
+Let $T = \mathbb{R}$ represent time. The horizon over a time interval $[t_0, t_1]$ is:
+
+\[
+h_{[t_0, t_1]} := \{ x_t : t \in [t_0, t_1] \}
+\]
+
+The System Computational Resource in a dynamic system is then:
+
+\[
+SCR_{x_{t+\Delta t} | h_{[0,t]}}(n)
+\]
+
+\section{Conclusion}
+
+This framework provides a formalized approach to understanding binary queries, computational resource costs, and system efficiency. The System Computational Resource (SCR) metric offers a means to evaluate the efficiency of computational processes, particularly in dynamic systems. Future work could explore specific applications of this framework in areas such as optimization, machine learning, and automated decision-making.
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}
