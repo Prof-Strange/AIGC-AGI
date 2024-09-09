@@ -70,7 +70,7 @@
 \maketitle
 
 \begin{abstract}
-In this paper, we introduce the concept of the Signal-to-Computation Ratio (SCR), a new metric for evaluating the computational efficiency required to extract information from a system. SCR is an intrinsic property of the system and is independent of the algorithm used. We define SCR mathematically and extend the concept to time-evolving dynamical systems.
+In this paper, we introduce the concept of Signal-to-Computation Ratio (SCR), a new metric for evaluating the computational efficiency required to extract information from a system. SCR is an intrinsic property of the system and is independent of the algorithm used. We define SCR mathematically and extend the concept to time-evolving dynamical systems.
 \end{abstract}
 
 \section{Introduction}
@@ -213,21 +213,24 @@ SCR_{x_t|h}(n) := \frac{n}{e_{x_t|h}(n)}
 
 \section{Application to Dynamical Systems}
 
-Let $T = \mathbb{R}$ represent time. The horizon over a time interval $[t_0, t_1]$ is:
+When applying to a dynamical system,
+$T = \mathbb{R}$ represents time. The horizon is typically a time history of the system:
 
 \[
-h_{[t_0, t_1]} := \{ x_t : t \in [t_0, t_1] \}
+h_{[t_0,t_1]}(x_t) := \{ x'\in X: t\in  [t_0,t_1]       \}
 \]
 
-The System Computational Resource in a dynamic system is then:
+The SCR to forecast a dynamic system $\Delta t$ in the future is then:
 
 \[
 SCR_{x_{t+\Delta t} | h_{[0,t]}}(n)
 \]
 
+Especially in chaotic systems, as $\Delta t$ increases, SCR decreases drastically, indicating the exponential difficulty to predict the far future. 
+
 \section{Conclusion}
 
-This framework provides a formalized approach to understanding binary queries, computational resource costs, and system efficiency. The System Computational Resource (SCR) metric offers a means to evaluate the efficiency of computational processes, particularly in dynamic systems. Future work could explore specific applications of this framework in areas such as optimization, machine learning, and automated decision-making.
+shit
 
 \bibliographystyle{plain}
 \bibliography{references}
