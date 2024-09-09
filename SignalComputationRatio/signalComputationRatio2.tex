@@ -85,7 +85,7 @@ Furthermore, we investigate it  in the context of time-evolving dynamical system
 
 \subsection{System}
 
-The system is defined as follows:
+The family of systems is defined as follows:
 
 \[
 X := \{ x_t \}_{t \in T}
@@ -211,13 +211,11 @@ SCR : S \rightarrow (\mathbb{N} \rightarrow \mathbb{R}^+)
 SCR_{x_t|h}(n) := \frac{n}{e_{x_t|h}(n)}
 \]
 
-\section{Application to Dynamical Systems}
-
-When applying to a dynamical system,
-$T = \mathbb{R}$ represents time. The horizon is typically a time history of the system:
-
+\section{Application to Time-Evolving Dynamical Systems}
+In many real-world applications, the systems of interest are time-evolving; $T = \mathbb{R}$ represents time. Let \(x_t\) represent the state of a dynamical system at time \(t \in T\). 
+In this context, the horizon often considers the entire trajectory of the system over a time interval, rather than a single snapshot.
 \[
-h_{[t_0,t_1]}(x_t) := \{ x'\in X: t\in  [t_0,t_1]       \}
+h_{[t_0,t_1]}(x_t) := \{ x_t      \}_{ t\in  [t_0,t_1] }
 \]
 
 The SCR to forecast a dynamic system $\Delta t$ in the future is then:
@@ -229,8 +227,8 @@ SCR_{x_{t+\Delta t} | h_{[0,t]}}(n)
 Especially in chaotic systems, as $\Delta t$ increases, SCR decreases drastically, indicating the exponential difficulty to predict the far future. 
 
 \section{Conclusion}
+In this paper, we introduced the concept of Signal-to-Computation Ratio (SCR) as a measure of the computational difficulty required to extract information from a system. We defined SCR mathematically and explored its properties, especially in the context of time-evolving dynamical systems. 
 
-shit
 
 \bibliographystyle{plain}
 \bibliography{references}
