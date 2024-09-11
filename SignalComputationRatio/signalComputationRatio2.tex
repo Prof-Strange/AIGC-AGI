@@ -105,6 +105,7 @@ We define the binary set $\mathbb{B}$ and the set of binary queries $Q$ as follo
 \[
 Q := \{ q : X \rightarrow \mathbb{B} \}
 \]
+Every $q$ essentially creates a macrostate of $x_t$, whose microstate may or may not obey equipartition. 
 
 Two binary queries $q$ and $q'$ are considered identical if they return the same output for all systems $x_t \in X$:
 
@@ -117,6 +118,8 @@ Furthermore, two queries $q$ and $q'$ are considered equivalent upto a transform
 \[
 \forall q, q' \in Q, \quad q \sim q' \iff \exists f \in \amalg, \forall x_t \in X, f \circ q(x_t) = q'(x_t)
 \]
+
+\subsubsection{Closure}
 
 \subsection{Horizon}
 
